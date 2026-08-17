@@ -1,4 +1,4 @@
-# AGENT DIRECTIVES: BEP MINH HIEU (NEXT.JS + SUPABASE)
+# AGENT DIRECTIVES: BEP MINH HIEU (Bếp Minh Hiếu) (NEXT.JS + SUPABASE)
 
 ## 1. CORE DISCIPLINE (Karpathy & Ponytail Principles)
 
@@ -25,3 +25,10 @@
 - **B2B Business Logic:**
   - Product prices can be `null` (display "Liên hệ báo giá").
   - Primary conversion goal is RFQ (Request for Quote / Nhận báo giá) and lead capture, not direct retail checkout.
+
+## 4. DESIGN SYSTEM SPECIFICATIONS (HIGH-END B2B INDUSTRIAL)
+
+- Palette: Zinc/Slate neutrals, Steel gray accents, selective Amber/Flame primary buttons.
+- Typography: Plus Jakarta Sans / Inter. Clean hierarchy, high contrast, tabular mono numbers for specs.
+- Components: Sharp or subtle rounded corners (rounded-sm or rounded-md), crisp borders (border-zinc-200 dark:border-zinc-800), zero flashy shadows.
+- Hero & Projects: High-impact full-width showcase sections emphasizing stainless steel craftsmanship and large-scale commercial kitchen projects.

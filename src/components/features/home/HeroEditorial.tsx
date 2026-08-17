@@ -6,14 +6,11 @@ import {
   heroContact,
   heroImages,
 } from "@/components/features/home/hero-editorial-data";
-import { HeroEditorialHeader } from "@/components/features/home/HeroEditorialHeader";
 import { HeroEditorialMiniFooter } from "@/components/features/home/HeroEditorialMiniFooter";
 
 export function HeroEditorial() {
   return (
     <section className="relative overflow-hidden bg-white font-sans">
-      <HeroEditorialHeader />
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 lg:py-14 xl:gap-16">
           <div className="relative flex flex-col justify-center">

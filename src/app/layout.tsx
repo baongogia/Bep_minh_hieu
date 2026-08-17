@@ -20,10 +20,7 @@ export const metadata: Metadata = {
   description:
     "Thiết kế, sản xuất và lắp đặt thiết bị bếp công nghiệp inox cao cấp.",
   icons: {
-    icon: [
-      { url: "/logo/favicon.png", sizes: "32x32", type: "image/png" },
-      { url: "/logo/Logo.png", sizes: "300x300", type: "image/png" },
-    ],
+    icon: [{ url: "/logo/favicon.png", sizes: "300x300", type: "image/png" }],
     apple: "/logo/Logo.png",
   },
 };

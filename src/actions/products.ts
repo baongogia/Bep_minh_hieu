@@ -6,18 +6,61 @@ import { productSlugSchema } from "@/types/product";
 
 type ProductsSuccess = { ok: true; data: Tables<"products">[] };
 type ProductSuccess = { ok: true; data: Tables<"products"> };
+type CategoriesSuccess = { ok: true; data: Tables<"categories">[] };
 type ActionError = { ok: false; error: string };
 
 export type GetProductsResult = ProductsSuccess | ActionError;
 export type GetProductBySlugResult = ProductSuccess | ActionError;
+export type GetCategoriesResult = CategoriesSuccess | ActionError;
 
-export async function getProducts(): Promise<GetProductsResult> {
+export type GetProductsOptions = {
+  categorySlug?: string | null;
+};
+
+export async function getCategories(): Promise<GetCategoriesResult> {
   const supabase = await createClient();
 
   const { data, error } = await supabase
-    .from("products")
+    .from("categories")
     .select("*")
+    .order("sort_order", { ascending: true, nullsFirst: false })
     .order("name");
+
+  if (error) {
+    return { ok: false, error: error.message };
+  }
+
+  return { ok: true, data: data ?? [] };
+}
+
+export async function getProducts(
+  options: GetProductsOptions = {},
+): Promise<GetProductsResult> {
+  const { categorySlug } = options;
+  const supabase = await createClient();
+
+  let query = supabase.from("products").select("*");
+
+  if (categorySlug) {
+    const { data: categoryRows, error: categoryError } = await supabase
+      .from("categories")
+      .select("id")
+      .eq("slug", categorySlug)
+      .limit(1);
+
+    if (categoryError) {
+      return { ok: false, error: categoryError.message };
+    }
+
+    const categoryId = categoryRows?.[0]?.id;
+    if (categoryId) {
+      query = query.eq("category_id", categoryId);
+    } else {
+      return { ok: true, data: [] };
+    }
+  }
+
+  const { data, error } = await query.order("name");
 
   if (error) {
     return { ok: false, error: error.message };

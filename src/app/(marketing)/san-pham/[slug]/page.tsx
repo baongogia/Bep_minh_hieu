@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getProductBySlug } from "@/actions/products";
 import { ProductSpecTable } from "@/components/features/products/ProductSpecTable";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, formatImageUrl } from "@/lib/utils";
+import { ProductImageWithFallback } from "@/components/ui/ProductImageWithFallback";
 
 type ProductDetailPageProps = PageProps<"/san-pham/[slug]">;
 
@@ -31,6 +31,7 @@ export default async function ProductDetailPage({
   }
 
   const product = result.data;
+  const imageUrl = formatImageUrl(product.thumbnail_url);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
@@ -43,20 +44,14 @@ export default async function ProductDetailPage({
 
       <div className="mt-8 grid gap-10 lg:grid-cols-2">
         <div className="relative aspect-square overflow-hidden rounded-md border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
-          {product.thumbnail_url ? (
-            <Image
-              src={product.thumbnail_url}
-              alt={product.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-sm text-zinc-500">
-              Chưa có ảnh
-            </div>
-          )}
+          <ProductImageWithFallback
+            src={imageUrl}
+            alt={product.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+          />
         </div>
 
         <div>

@@ -1,15 +1,15 @@
-import { ArrowRight, FileText } from "lucide-react";
-import Image from "next/image";
+import { FileText } from "lucide-react";
 import Link from "next/link";
 
 import type { Product } from "@/types/product";
-import { cn } from "@/lib/utils";
+import { formatImageUrl } from "@/lib/utils";
+import { ProductImageWithFallback } from "@/components/ui/ProductImageWithFallback";
 
 type ProductCardProps = {
   product: Product;
 };
 
-function formatPrice(
+function formatPriceBadge(
   price: Product["price"],
   isQuoteOnly: Product["is_quote_only"],
 ) {
@@ -23,96 +23,63 @@ function formatPrice(
   }).format(price);
 }
 
-function getMaterialTag(status: Product["status"]): {
-  label: string;
-  className: string;
-} {
-  if (status === "made_to_order") {
-    return {
-      label: "Made to Order",
-      className:
-        "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-400",
-    };
-  }
-
-  return {
-    label: "Inox 304",
-    className:
-      "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300",
-  };
-}
-
 export function ProductCard({ product }: ProductCardProps) {
-  const tag = getMaterialTag(product.status);
-  const isQuoteOnly = product.is_quote_only === true || product.price === null;
+  const imageUrl = formatImageUrl(product.thumbnail_url);
+  const priceLabel = formatPriceBadge(product.price, product.is_quote_only);
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-sm border border-zinc-200 bg-white transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950">
-      <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
-        {product.thumbnail_url ? (
-          <Image
-            src={product.thumbnail_url}
-            alt={product.name}
-            fill
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-sm text-zinc-500 dark:text-zinc-400">
-            Chưa có ảnh
-          </div>
-        )}
+    <div className="group relative flex flex-col overflow-hidden rounded-md border border-stone-200 bg-white shadow-2xs transition-all hover:-translate-y-0.5 hover:border-stone-800 hover:shadow-md dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-600">
+      {/* 1:1 Square Image Container */}
+      <Link
+        href={`/san-pham/${product.slug}`}
+        className="block relative aspect-square w-full overflow-hidden bg-stone-50/50 dark:bg-stone-800/40"
+      >
+        <ProductImageWithFallback
+          src={imageUrl}
+          alt={product.name}
+          fill
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        />
 
-        <span
-          className={cn(
-            "absolute left-3 top-3 inline-flex items-center rounded-sm border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest",
-            tag.className,
-          )}
-        >
-          {tag.label}
+        {/* Inox 304 Corner Tag */}
+        <span className="absolute left-3 top-3 inline-flex items-center rounded-xs border border-stone-200/80 bg-white/90 px-2 py-0.5 text-[10px] font-mono font-semibold uppercase tracking-widest text-stone-900 shadow-2xs backdrop-blur-xs dark:border-stone-700 dark:bg-stone-900/90 dark:text-stone-100">
+          INOX 304
         </span>
-      </div>
+      </Link>
 
-      <div className="flex flex-1 flex-col gap-4 border-t border-zinc-100 p-5 dark:border-zinc-800/60">
-        <div className="space-y-2">
-          <h3 className="font-sans line-clamp-2 text-sm font-semibold leading-snug text-zinc-900 dark:text-zinc-50">
-            {product.name}
-          </h3>
-          {product.sku ? (
-            <p className="font-mono text-[11px] tracking-wide text-zinc-500 dark:text-zinc-400">
-              SKU · {product.sku}
+      {/* Product Content Details */}
+      <div className="flex flex-1 flex-col justify-between p-4 space-y-3">
+        <div className="space-y-1.5">
+          <Link href={`/san-pham/${product.slug}`} className="block">
+            <h3 className="h-11 font-serif text-sm font-bold leading-snug text-stone-900 line-clamp-2 transition-colors group-hover:text-stone-700 dark:text-stone-50 dark:group-hover:text-stone-300">
+              {product.name}
+            </h3>
+          </Link>
+
+          {product.sku && (
+            <p className="font-mono text-[10px] uppercase tracking-wider text-stone-400">
+              SKU: {product.sku}
             </p>
-          ) : null}
+          )}
         </div>
 
-        <p
-          className={cn(
-            "font-mono text-sm font-bold",
-            isQuoteOnly
-              ? "text-amber-700 dark:text-amber-500"
-              : "text-zinc-950 dark:text-zinc-50",
-          )}
-        >
-          {formatPrice(product.price, product.is_quote_only)}
-        </p>
+        <div className="flex items-center justify-between pt-1">
+          {/* Price Badge */}
+          <span className="inline-block rounded bg-stone-100 px-2 py-0.5 font-mono text-xs font-medium text-stone-600 dark:bg-stone-800 dark:text-stone-300">
+            {priceLabel}
+          </span>
 
-        <div className="mt-auto flex flex-col gap-2 pt-2">
+          {/* Quick RFQ Action Link */}
           <Link
             href={`/lien-he?product=${product.slug}`}
-            className="inline-flex w-full items-center justify-center gap-1.5 rounded-sm bg-zinc-950 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+            className="inline-flex items-center gap-1 rounded border border-stone-300 bg-white px-2.5 py-1 text-[11px] font-semibold text-stone-800 shadow-2xs transition-all hover:border-stone-900 hover:bg-stone-900 hover:text-white dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200 dark:hover:bg-stone-100 dark:hover:text-stone-900"
           >
-            <FileText className="size-3.5" />
-            Yêu cầu báo giá
-          </Link>
-          <Link
-            href={`/san-pham/${product.slug}`}
-            className="inline-flex w-full items-center justify-center gap-1.5 rounded-sm border border-zinc-200 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-700 transition-colors hover:border-zinc-400 hover:text-zinc-950 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500 dark:hover:text-zinc-50"
-          >
-            Chi tiết kỹ thuật
-            <ArrowRight className="size-3" />
+            <FileText className="size-3" />
+            Báo giá
           </Link>
         </div>
       </div>
-    </article>
+    </div>
   );
 }

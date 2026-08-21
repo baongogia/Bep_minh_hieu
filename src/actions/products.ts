@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/server";
 import type { Tables } from "@/types/database.types";
 import { productSlugSchema } from "@/types/product";
 
@@ -18,7 +18,7 @@ export type GetProductsOptions = {
 };
 
 export async function getCategories(): Promise<GetCategoriesResult> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("categories")
@@ -37,7 +37,7 @@ export async function getProducts(
   options: GetProductsOptions = {},
 ): Promise<GetProductsResult> {
   const { categorySlug } = options;
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   let query = supabase.from("products").select("*");
 
@@ -78,7 +78,7 @@ export async function getProductBySlug(
     return { ok: false, error: "Slug không hợp lệ" };
   }
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data, error } = await supabase
     .from("products")

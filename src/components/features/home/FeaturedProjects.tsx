@@ -27,42 +27,42 @@ const projects = [
     scope: "Nồi công nghiệp, tủ giữ nóng, bàn phục vụ 500 suất",
     duration: "30 ngày",
     image:
-      "https://images.unsplash.com/photo-1580442151529-313817f7ddb5?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?q=80&w=1200&auto=format&fit=crop",
     href: "/du-an",
   },
 ] as const;
 
 export function FeaturedProjects() {
   return (
-    <section className="bg-zinc-50 font-sans dark:bg-zinc-950">
+    <section className="bg-stone-50 font-sans dark:bg-stone-950">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-12 flex items-center gap-4">
-          <span className="text-xs font-medium tracking-widest text-zinc-500 dark:text-zinc-400">
+          <span className="font-mono text-xs font-semibold tracking-widest text-stone-400 dark:text-stone-500">
             03 / DỰ ÁN ĐÃ HOÀN THIỆN
           </span>
-          <span className="h-px max-w-16 flex-1 bg-zinc-300 dark:bg-zinc-700" />
+          <span className="h-px max-w-16 flex-1 bg-stone-300 dark:bg-stone-700" />
         </div>
 
         <div className="relative isolate mb-14 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="relative max-w-3xl">
             <span
               aria-hidden
-              className="pointer-events-none absolute -left-2 -top-8 -z-10 select-none text-8xl font-extrabold text-zinc-100/80 sm:text-9xl dark:text-zinc-900/60"
+              className="pointer-events-none absolute -left-2 -top-8 -z-10 select-none font-mono text-8xl font-extrabold text-stone-200/80 sm:text-9xl dark:text-stone-900/60"
             >
               03
             </span>
             <h2 className="relative font-sans">
-              <span className="block text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+              <span className="block text-xs font-semibold uppercase tracking-widest text-stone-500 dark:text-stone-400">
                 Tạp chí kiến trúc &amp; thi công
               </span>
-              <span className="mt-2 block font-sans text-3xl font-extrabold uppercase tracking-tight text-zinc-950 md:text-4xl dark:text-zinc-50">
+              <span className="mt-2 block font-sans text-3xl font-extrabold uppercase tracking-tight text-stone-950 md:text-4xl dark:text-stone-50">
                 Dự án tiêu biểu
               </span>
             </h2>
           </div>
           <Link
             href="/du-an"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-zinc-950 transition-colors hover:text-zinc-600 dark:text-zinc-50 dark:hover:text-zinc-300"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-stone-950 transition-colors hover:text-stone-600 dark:text-stone-50 dark:hover:text-stone-300"
           >
             Xem toàn bộ hồ sơ
             <ArrowRight className="size-3.5" />
@@ -73,17 +73,9 @@ export function FeaturedProjects() {
           {projects.map((project, index) => (
             <article
               key={project.title}
-              className="group flex flex-col overflow-hidden bg-white dark:bg-zinc-950"
+              className="group flex flex-col overflow-hidden rounded-md border border-stone-200 bg-white shadow-2xs transition-all hover:border-stone-800 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-600"
             >
-              <div
-                className={`relative w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900 ${
-                  index === 0
-                    ? "aspect-[4/5]"
-                    : index === 1
-                      ? "aspect-[4/5]"
-                      : "aspect-[4/5]"
-                }`}
-              >
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -92,49 +84,49 @@ export function FeaturedProjects() {
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
                 <div className="absolute left-4 top-4">
-                  <span className="inline-flex items-center gap-1.5 rounded-sm bg-white/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-950 shadow-sm backdrop-blur-sm">
+                  <span className="inline-flex items-center gap-1.5 rounded-xs border border-stone-200 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-stone-900 shadow-2xs backdrop-blur-xs">
                     <span className="font-mono">0{index + 1}</span>
-                    <span className="h-3 w-px bg-zinc-300" />
+                    <span className="h-3 w-px bg-stone-300" />
                     <span>Hoàn thiện</span>
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-1 flex-col gap-5 border border-zinc-200 border-t-0 p-6 dark:border-zinc-800">
-                <h3 className="font-sans text-lg font-bold uppercase tracking-tight leading-tight text-zinc-950 dark:text-zinc-50">
+              <div className="flex flex-1 flex-col gap-5 p-6">
+                <h3 className="font-sans text-base font-bold uppercase tracking-tight leading-snug text-stone-950 transition-colors group-hover:text-stone-700 dark:text-stone-50 dark:group-hover:text-stone-300">
                   {project.title}
                 </h3>
 
-                <div className="space-y-2.5 border-t border-zinc-100 pt-4 text-xs text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
+                <div className="space-y-2.5 border-t border-stone-100 pt-4 text-xs text-stone-600 dark:border-stone-800 dark:text-stone-400">
                   <div className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 size-3.5 shrink-0 text-zinc-400 dark:text-zinc-500" />
+                    <MapPin className="mt-0.5 size-3.5 shrink-0 text-stone-400" />
                     <div>
-                      <span className="block text-[10px] font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+                      <span className="block text-[10px] font-semibold uppercase tracking-widest text-stone-400">
                         Địa điểm
                       </span>
-                      <span className="font-medium text-zinc-800 dark:text-zinc-200">
+                      <span className="font-medium text-stone-800 dark:text-stone-200">
                         {project.location}
                       </span>
                     </div>
                   </div>
                   <div className="flex items-start gap-2.5">
-                    <Package className="mt-0.5 size-3.5 shrink-0 text-zinc-400 dark:text-zinc-500" />
+                    <Package className="mt-0.5 size-3.5 shrink-0 text-stone-400" />
                     <div>
-                      <span className="block text-[10px] font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+                      <span className="block text-[10px] font-semibold uppercase tracking-widest text-stone-400">
                         Hạng mục bàn giao
                       </span>
-                      <span className="font-medium leading-5 text-zinc-800 dark:text-zinc-200">
+                      <span className="font-medium leading-5 text-stone-800 dark:text-stone-200">
                         {project.scope}
                       </span>
                     </div>
                   </div>
                   <div className="flex items-start gap-2.5">
-                    <Calendar className="mt-0.5 size-3.5 shrink-0 text-zinc-400 dark:text-zinc-500" />
+                    <Calendar className="mt-0.5 size-3.5 shrink-0 text-stone-400" />
                     <div>
-                      <span className="block text-[10px] font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+                      <span className="block text-[10px] font-semibold uppercase tracking-widest text-stone-400">
                         Thời gian hoàn thiện
                       </span>
-                      <span className="font-medium text-zinc-800 dark:text-zinc-200">
+                      <span className="font-medium text-stone-800 dark:text-stone-200">
                         {project.duration}
                       </span>
                     </div>
@@ -143,10 +135,10 @@ export function FeaturedProjects() {
 
                 <Link
                   href={project.href}
-                  className="mt-auto inline-flex items-center justify-between border-t border-zinc-100 pt-4 text-xs font-semibold uppercase tracking-wider text-zinc-950 transition-colors hover:text-zinc-600 dark:border-zinc-800 dark:text-zinc-50 dark:hover:text-zinc-300"
+                  className="mt-auto inline-flex items-center justify-between border-t border-stone-100 pt-4 text-xs font-semibold uppercase tracking-wider text-stone-950 transition-colors hover:text-stone-600 dark:border-stone-800 dark:text-stone-50 dark:hover:text-stone-300"
                 >
                   Xem hồ sơ công trình
-                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </article>

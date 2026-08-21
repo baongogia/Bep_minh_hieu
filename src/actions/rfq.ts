@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/server";
 import { rfqFormSchema, type RfqFormInput } from "@/types/rfq";
 
 type RfqSuccess = { ok: true };
@@ -23,7 +23,7 @@ export async function submitRfq(input: RfqFormInput): Promise<SubmitRfqResult> {
     };
   }
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const {
     customer_name,
     phone,

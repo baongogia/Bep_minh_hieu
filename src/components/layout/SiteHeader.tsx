@@ -43,7 +43,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <Link
             href="/lien-he"
-            className="hidden rounded-sm bg-zinc-950 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-zinc-800 sm:inline-flex dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+            className="hidden rounded-md bg-stone-900 px-4.5 py-2.5 text-xs font-semibold uppercase tracking-wider text-stone-50 shadow-2xs transition-colors hover:bg-stone-800 sm:inline-flex dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-200"
           >
             Yêu cầu báo giá
           </Link>
@@ -52,7 +52,7 @@ export function SiteHeader() {
             type="button"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Đóng menu" : "Mở menu"}
-            className="inline-flex size-10 items-center justify-center rounded-sm border border-zinc-200 text-zinc-950 lg:hidden dark:border-zinc-800 dark:text-zinc-50"
+            className="inline-flex size-10 items-center justify-center rounded-md border border-stone-200 text-stone-950 lg:hidden dark:border-stone-800 dark:text-stone-50"
             onClick={() => setMobileOpen((open) => !open)}
           >
             {mobileOpen ? (
@@ -66,7 +66,7 @@ export function SiteHeader() {
 
       <div
         className={cn(
-          "border-t border-zinc-200 bg-white lg:hidden dark:border-zinc-800 dark:bg-zinc-950",
+          "border-t border-stone-200 bg-white lg:hidden dark:border-stone-800 dark:bg-stone-950",
           mobileOpen ? "block" : "hidden",
         )}
       >
@@ -75,7 +75,7 @@ export function SiteHeader() {
             <Link
               key={`m-${item.href}-${item.label}`}
               href={item.href}
-              className="border-b border-zinc-100 py-3 text-sm font-medium uppercase tracking-wider text-zinc-700 last:border-b-0 dark:border-zinc-800 dark:text-zinc-300"
+              className="border-b border-stone-100 py-3 text-sm font-medium uppercase tracking-wider text-stone-700 last:border-b-0 dark:border-stone-800 dark:text-stone-300"
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
@@ -83,7 +83,7 @@ export function SiteHeader() {
           ))}
           <Link
             href="/lien-he"
-            className="mt-4 inline-flex justify-center rounded-sm bg-zinc-950 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-white dark:bg-white dark:text-zinc-950"
+            className="mt-4 inline-flex justify-center rounded-md bg-stone-900 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-stone-50 shadow-2xs transition-colors hover:bg-stone-800 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-200"
             onClick={() => setMobileOpen(false)}
           >
             Yêu cầu báo giá

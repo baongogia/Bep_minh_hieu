@@ -43,24 +43,24 @@ export function QuickRfqBanner() {
     <section className="border-t border-zinc-200 bg-zinc-50 font-sans dark:border-zinc-800 dark:bg-zinc-950">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 flex items-center gap-4">
-          <span className="text-xs font-medium tracking-widest text-zinc-500 dark:text-zinc-400">
+          <span className="font-mono text-xs font-semibold tracking-widest text-stone-400 dark:text-stone-500">
             04 / BÁO GIÁ NHANH
           </span>
-          <span className="h-px max-w-16 flex-1 bg-zinc-300 dark:bg-zinc-700" />
+          <span className="h-px max-w-16 flex-1 bg-stone-300 dark:bg-stone-700" />
         </div>
 
         <div className="relative isolate mb-12 max-w-4xl">
           <span
             aria-hidden
-            className="pointer-events-none absolute -left-2 -top-8 -z-10 select-none text-8xl font-extrabold text-zinc-100/80 sm:text-9xl dark:text-zinc-900/60"
+            className="pointer-events-none absolute -left-2 -top-8 -z-10 select-none font-mono text-8xl font-extrabold text-stone-200/80 sm:text-9xl dark:text-stone-900/60"
           >
             04
           </span>
           <h2 className="relative font-sans">
-            <span className="block text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+            <span className="block text-xs font-semibold uppercase tracking-widest text-stone-500 dark:text-stone-400">
               Gửi yêu cầu trong vòng 60 giây
             </span>
-            <span className="mt-2 block font-sans text-3xl font-extrabold uppercase tracking-tight text-zinc-950 md:text-4xl dark:text-zinc-50">
+            <span className="mt-2 block font-sans text-3xl font-extrabold uppercase tracking-tight text-stone-950 md:text-4xl dark:text-stone-50">
               Nhận bảng giá dự án
             </span>
           </h2>

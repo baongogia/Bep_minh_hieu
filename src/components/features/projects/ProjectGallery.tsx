@@ -1,6 +1,5 @@
-import Image from "next/image";
-
 import type { Tables } from "@/types/database.types";
+import { ProductImageWithFallback } from "@/components/ui/ProductImageWithFallback";
 
 type Project = Tables<"projects">;
 
@@ -30,19 +29,13 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
           className="overflow-hidden rounded-md border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950"
         >
           <div className="relative aspect-[16/10] bg-zinc-100 dark:bg-zinc-900">
-            {project.thumbnail_url ? (
-              <Image
-                src={project.thumbnail_url}
-                alt={project.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-sm text-zinc-500">
-                Chưa có ảnh
-              </div>
-            )}
+            <ProductImageWithFallback
+              src={project.thumbnail_url}
+              alt={project.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
           </div>
 
           <div className="space-y-2 p-4">
